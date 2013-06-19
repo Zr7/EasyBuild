@@ -6,7 +6,7 @@ EasyBuild
 
 ##System requirements
 
-- Visual Studio 2010 must be installed
+- Visual Studio 2010 must be installed - Visual Studio 2012 builds are not currently working
 - a Git Shell of some form must be installed
 
 ##How to use EasyBuild
