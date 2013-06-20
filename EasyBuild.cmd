@@ -16,7 +16,7 @@ echo  ###  #####  ### ########## ###   #####  ###   #### ####   ####        ####
 echo  ###  #####  ### ########## ###   #####  #########   #########   ##########
 echo  ###  #####  ### ###    ### ###    ####  #########   #########   ######### 
 echo  ###   ###   ### ###    ### ###     ###   #######     #######     #######  
-echo  Easy Builder                                         Revision 1.0 by Antz
+echo  Easy Builder                                         Revision 1.1 by Antz
 echo.
 echo  Website: http://www.getmangos.co.uk                    
 echo     Wiki: http://github.com/mangoswiki/wiki             
@@ -72,16 +72,27 @@ echo.
 echo  Step 2 : Select Activity
 echo  ========================
 echo   C  - Clone Repositories
+if not exist %corever%server goto SkipOptions:
 echo   CB - Clone and Build
 echo   U  - Update Repositories
 echo   UB - Update and Build
 echo   B  - Build Existing Repositories
+:SkipOptions
 echo   P  - Previous Step
 echo   X  - Exit
 echo.
 set /p activity=Please select an activity ? : 
 if %activity% == C goto CloneStep:
 if %activity% == c goto CloneStep:
+
+if %activity% == P goto StartStep:
+if %activity% == p goto StartStep:
+if %activity% == X goto ExitStep:
+if %activity% == x goto ExitStep:
+
+rem If the server folder does not exist, bail
+if not exist %corever%server goto PathError:
+
 if %activity% == CB goto CloneStep:
 if %activity% == cb goto CloneStep:
 if %activity% == U goto UpdateStep:
@@ -90,10 +101,17 @@ if %activity% == UB goto UpdateStep:
 if %activity% == ub goto UpdateStep:
 if %activity% == B goto BuildOnlyStep:
 if %activity% == b goto BuildOnlyStep:
-if %activity% == P goto StartStep:
-if %activity% == p goto StartStep:
-if %activity% == X goto ExitStep:
-if %activity% == x goto ExitStep:
+
+goto ExitStep:
+
+:PathError
+echo.
+echo  #################################
+echo  ## THE SERVER MUST EXIST FIRST ##
+echo  #################################
+echo.
+exit
+
 
 
 :ExitStep
