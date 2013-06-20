@@ -72,8 +72,8 @@ echo.
 echo  Step 2 : Select Activity
 echo  ========================
 echo   C  - Clone Repositories
-if not exist %corever%server goto SkipOptions:
 echo   CB - Clone and Build
+if not exist %corever%server goto SkipOptions:
 echo   U  - Update Repositories
 echo   UB - Update and Build
 echo   B  - Build Existing Repositories
@@ -84,6 +84,8 @@ echo.
 set /p activity=Please select an activity ? : 
 if %activity% == C goto CloneStep:
 if %activity% == c goto CloneStep:
+if %activity% == CB goto CloneStep:
+if %activity% == cb goto CloneStep:
 
 if %activity% == P goto StartStep:
 if %activity% == p goto StartStep:
@@ -93,8 +95,6 @@ if %activity% == x goto ExitStep:
 rem If the server folder does not exist, bail
 if not exist %corever%server goto PathError:
 
-if %activity% == CB goto CloneStep:
-if %activity% == cb goto CloneStep:
 if %activity% == U goto UpdateStep:
 if %activity% == u goto UpdateStep:
 if %activity% == UB goto UpdateStep:
