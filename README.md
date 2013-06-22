@@ -48,7 +48,35 @@ EasyBuild
 
     Which core would you like to work with ? :
 
-4) Select which core you want to work with, then choose what you want to do:-
+4) Select which core you want to work with, then decide where to store it and the local repo name.
+
+
+    ####       ####            ###     ###   ########    #######     ########
+    #####     #####            ####    ###  ##########  #########   ##########
+    #####     #####            #####   ###  ##########  #########   ##########
+    ######   ######            #####   ###  ###        ####   ####  ###
+    ######   ######    ####    ######  ###  ###        ###     ###  ###
+    ####### #######   ######   ######  ###  ###  ##### ###     ###  ########
+    ### ### ### ###   ######   ####### ###  ###  ##### ###     ###  #########
+    ### ### ### ###  ###  ###  ### ### ###  ###  ##### ###     ###   #########
+    ### ####### ###  ###  ###  ###  ######  ###    ### ###     ###        ####
+    ### ####### ###  ###  ###  ###  ######  ###    ### ###     ###         ###
+    ###  #####  ### ########## ###   #####  ###   #### ####   ####        ####
+    ###  #####  ### ########## ###   #####  #########   #########   ##########
+    ###  #####  ### ###    ### ###    ####  #########   #########   #########
+    ###   ###   ### ###    ### ###     ###   #######     #######     #######
+
+    Website: http://www.getmangos.co.uk
+       Wiki: http://github.com/mangoswiki/wiki
+      Forum: http://community.getmangos.co.uk
+
+    Step 2 : Select Default Path / Folder
+    =====================================
+
+    The Default folder is set as "0server"
+    Please enter new path / foldername (Enter uses default)?
+
+5) Then choose what you want to do:-
 
     ####       ####            ###     ###   ########    #######     ######## 
     #####     #####            ####    ###  ##########  #########   ##########

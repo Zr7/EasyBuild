@@ -16,7 +16,7 @@ echo  ###  #####  ### ########## ###   #####  ###   #### ####   ####        ####
 echo  ###  #####  ### ########## ###   #####  #########   #########   ##########
 echo  ###  #####  ### ###    ### ###    ####  #########   #########   ######### 
 echo  ###   ###   ### ###    ### ###     ###   #######     #######     #######  
-echo  Easy Builder                                         Revision 1.1 by Antz
+echo  Easy Builder                                         Revision 1.2 by Antz
 echo.
 echo  Website: http://www.getmangos.co.uk                    
 echo     Wiki: http://github.com/mangoswiki/wiki             
@@ -69,11 +69,50 @@ echo     Wiki: http://github.com/mangoswiki/wiki
 echo    Forum: http://community.getmangos.co.uk              
 echo.
 echo.
-echo  Step 2 : Select Activity
+echo  Step 2 : Select Default Path / Folder
+echo  =====================================
+
+echo.
+set buildfoldername=%corever%server
+echo The Default folder is set as "%buildfoldername%"
+set /p foldername=Please enter new path / foldername (Enter uses default)? 
+IF [%foldername%]==[] goto Step3:
+set buildfoldername=%foldername%
+
+:Step3
+rem ############################### STEP 3 #####################################
+cls
+echo.
+echo  ####       ####            ###     ###   ########    #######     ######## 
+echo  #####     #####            ####    ###  ##########  #########   ##########
+echo  #####     #####            #####   ###  ##########  #########   ##########
+echo  ######   ######            #####   ###  ###        ####   ####  ###       
+echo  ######   ######    ####    ######  ###  ###        ###     ###  ###       
+echo  ####### #######   ######   ######  ###  ###  ##### ###     ###  ########  
+echo  ### ### ### ###   ######   ####### ###  ###  ##### ###     ###  ######### 
+echo  ### ### ### ###  ###  ###  ### ### ###  ###  ##### ###     ###   #########
+echo  ### ####### ###  ###  ###  ###  ######  ###    ### ###     ###        ####
+echo  ### ####### ###  ###  ###  ###  ######  ###    ### ###     ###         ###
+echo  ###  #####  ### ########## ###   #####  ###   #### ####   ####        ####
+echo  ###  #####  ### ########## ###   #####  #########   #########   ##########
+echo  ###  #####  ### ###    ### ###    ####  #########   #########   ######### 
+echo  ###   ###   ### ###    ### ###     ###   #######     #######     #######  
+echo.
+echo  Website: http://www.getmangos.co.uk                    
+echo     Wiki: http://github.com/mangoswiki/wiki             
+echo    Forum: http://community.getmangos.co.uk              
+echo.
+echo.
+echo  Step 3 : Select Activity
 echo  ========================
+
+echo.
+
+if exist %buildfoldername% goto CanNotClone:
 echo   C  - Clone Repositories
 echo   CB - Clone and Build
-if not exist %corever%server goto SkipOptions:
+:CanNotClone
+if not exist %buildfoldername% goto SkipOptions:
 echo   U  - Update Repositories
 echo   UB - Update and Build
 echo   B  - Build Existing Repositories
@@ -82,18 +121,21 @@ echo   P  - Previous Step
 echo   X  - Exit
 echo.
 set /p activity=Please select an activity ? : 
+
+if exist %buildfoldername% goto MustNotClone:
 if %activity% == C goto CloneStep:
 if %activity% == c goto CloneStep:
 if %activity% == CB goto CloneStep:
 if %activity% == cb goto CloneStep:
 
+:MustNotClone
 if %activity% == P goto StartStep:
 if %activity% == p goto StartStep:
 if %activity% == X goto ExitStep:
 if %activity% == x goto ExitStep:
 
 rem If the server folder does not exist, bail
-if not exist %corever%server goto PathError:
+if not exist %buildfoldername% goto PathError:
 
 if %activity% == U goto UpdateStep:
 if %activity% == u goto UpdateStep:
@@ -123,6 +165,7 @@ echo.
 exit
 
 :BuildOnlyStep
+
 if %corever% == 0 goto BuildZero:
 if %corever% == 1 goto BuildOne: 
 if %corever% == 2 goto BuildTwo:
@@ -155,17 +198,16 @@ echo     Wiki: http://github.com/mangoswiki/wiki      ##    ####  #####   ##  ##
 echo                                                 ##     ##    ## ##   ##  ##
 echo    Forum: http://community.getmangos.co.uk      #####  ####  ##  ##   #### 
 echo.
-echo.
 echo  ######################
 echo  ## CLONING SERVER   ##
 echo  ######################
-git clone https://github.com/mangoszero/server 0server
+git clone https://github.com/mangoszero/server %buildfoldername%
 
 echo.
 echo  ######################
 echo  ## CLONING SCRIPTS  ##
 echo  ######################
-cd 0server/src/bindings
+cd %buildfoldername%/src/bindings
 git clone https://github.com/mangoszero/scripts scripts
 
 rem #################################################################
@@ -209,13 +251,13 @@ echo.
 echo  ######################
 echo  ## CLONING SERVER   ##
 echo  ######################
-git clone https://github.com/mangosone/server 1server
+git clone https://github.com/mangosone/server %buildfoldername%
 
 echo.
 echo  ######################
 echo  ## CLONING SCRIPTS  ##
 echo  ######################
-cd 1server/src/bindings
+cd %buildfoldername%/src/bindings
 git clone https://github.com/mangosone/scripts scripts
 
 rem #################################################################
@@ -259,13 +301,13 @@ echo.
 echo ######################
 echo ## CLONING SERVER   ##
 echo ######################
-git clone https://github.com/mangostwo/server 2server
+git clone https://github.com/mangostwo/server %buildfoldername%
 
 echo.
 echo ######################
 echo ## CLONING SCRIPTS  ##
 echo ######################
-cd 2server/src/bindings
+cd %buildfoldername%/src/bindings
 git clone https://github.com/mangostwo/scripts scripts
 
 rem #################################################################
@@ -309,13 +351,13 @@ echo.
 echo  ######################
 echo  ## CLONING SERVER   ##
 echo  ######################
-git clone https://github.com/mangosthree/server 3server
+git clone https://github.com/mangosthree/server %buildfoldername%
 
 echo.
 echo  ######################
 echo  ## CLONING SCRIPTS  ##
 echo  ######################
-cd 3server/src/bindings
+cd %buildfoldername%/src/bindings
 git clone https://github.com/mangosthree/scripts scripts
 
 rem #################################################################
@@ -359,13 +401,13 @@ echo.
 echo  ######################
 echo  ## CLONING SERVER   ##
 echo  ######################
-git clone https://github.com/mangosfour/server 4server
+git clone https://github.com/mangosfour/server %buildfoldername%
 
 echo.
 echo  ######################
 echo  ## CLONING SCRIPTS  ##
 echo  ######################
-cd 4server/src/bindings
+cd %buildfoldername%/src/bindings
 git clone https://github.com/mangosfour/scripts scripts
 
 rem #################################################################
@@ -444,7 +486,7 @@ echo.
 echo  ######################
 echo  ## UPDATING SERVER  ##
 echo  ######################
-cd 0server
+cd %buildfoldername%
 rem re-pull the modified CMakeLists file
 git checkout src/bindings/CMakeLists.txt
 git pull
@@ -495,7 +537,7 @@ echo                                                 ##     ##    ## ##   ##  ##
 echo    Forum: http://community.getmangos.co.uk      #####  ####  ##  ##   #### 
 echo.
 echo.
-cd 0server/win
+cd %buildfoldername%/win
 goto BuildStep:
 
 
@@ -528,7 +570,7 @@ echo.
 echo  ######################
 echo  ## UPDATING SERVER  ##
 echo  ######################
-cd 1server
+cd %buildfoldername%
 rem re-pull the modified CMakeLists file
 git checkout src/bindings/CMakeLists.txt
 git pull
@@ -578,7 +620,7 @@ echo                                                         ## ##  ## ###  ##
 echo    Forum: http://community.getmangos.co.uk               ###   ##  ##  ####
 echo.
 echo.
-cd 1server/win
+cd %buildfoldername%/win
 goto BuildStep:
 
 
@@ -611,7 +653,7 @@ echo.
 echo  ######################
 echo  ## UPDATING SERVER  ##
 echo  ######################
-cd 2server
+cd %buildfoldername%
 rem re-pull the modified CMakeLists file
 git checkout src/bindings/CMakeLists.txt
 git pull
@@ -662,7 +704,7 @@ echo                                                        ##    ######   ## ##
 echo    Forum: http://community.getmangos.co.uk             ##     ####     ### 
 echo.
 echo.
-cd 2server/win
+cd %buildfoldername%/win
 goto BuildStep:
 
 :UpdateThree
@@ -694,7 +736,7 @@ echo.
 echo  ######################
 echo  ## UPDATING SERVER  ##
 echo  ######################
-cd 3server
+cd %buildfoldername%
 rem re-pull the modified CMakeLists file
 git checkout src/bindings/CMakeLists.txt
 git pull
@@ -745,7 +787,7 @@ echo                                               ##  ## ##  ## ##   ##    ##
 echo    Forum: http://community.getmangos.co.uk    ##  ## ##  ##  ##  ####  ####
 echo.
 echo.
-cd 3server/win
+cd %buildfoldername%/win
 goto BuildStep:
 
 :UpdateFour
@@ -777,7 +819,7 @@ echo.
 echo  ######################
 echo  ## UPDATING SERVER  ##
 echo  ######################
-cd 4server
+cd %buildfoldername%
 rem re-pull the modified CMakeLists file
 git checkout src/bindings/CMakeLists.txt
 git pull
@@ -828,7 +870,7 @@ echo                                                 ##    ## ##  ## ##  ## ##
 echo   Forum: http://community.getmangos.co.uk       ##     ###    ###   ##  ##
 echo.
 echo.
-cd 4server/win
+cd %buildfoldername%/win
 goto BuildStep:
 
 :BuildStep
@@ -836,10 +878,27 @@ echo.
 echo  ######################
 echo  ## BUILDING SERVER  ##
 echo  ######################
-
-msbuild mangosdVC100.sln /p:Configuration=Release
+msbuild mangosdVC100.sln /p:Configuration=Release /t:Clean;Rebuild
 cd ..
+
+echo.
+echo  #########################
+echo  ## BUILDING EXTRACTORS ##
+echo  #########################
+rem pause
+rem copy win\VC100\zlib__Win32_Release\zlib.lib contrib\extractor
+rem pause
+rem msbuild contrib\extractor\VC100_AD.sln /p:Configuration=Release 
+rem pause
+msbuild vmap_extractor\win\vmapExtractor_VC100.sln /p:Configuration=Release /t:Clean;Rebuild
+msbuild contrib\vmap_assembler\vmap_assemblerVC100.sln /p:Configuration=Release /t:Clean;Rebuild
+msbuild contrib\mmap\win\MoveMapGen_VC100.sln /p:Configuration=Release /t:Clean;Rebuild
+
+echo.
+echo  ######################
+echo  ## BUILDING SCRIPTS ##
+echo  ######################
 cd src\bindings\scripts
-msbuild scriptVC100.sln /p:Configuration=Release
+msbuild scriptVC100.sln /p:Configuration=Release /t:Clean;Rebuild
 cd ../../../bin
 
